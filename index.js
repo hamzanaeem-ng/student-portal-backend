@@ -1,11 +1,17 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const mainRH = require("./routes/main");
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const options = {
+  origin: 'http://localhost:1200'
+};
+app.use(express.json());
+app.use(cors(options));
+app.use("/api/v1/main/", mainRH);
+
+const port = 8080;
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server is ready to listen on port ${port}`);
 });
